@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("last_name");
             $table->string("degree");
             $table->string("job_title");
+            $table->string("company");
             $table->text("advertisement");
             $table->string("response");
             $table->timestamps();

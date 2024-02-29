@@ -21,15 +21,14 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('letters', \App\Http\Controllers\LetterController::class,)
-    ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
+Route::get('/letters', [\App\Http\Controllers\LetterController::class, 'index'])->name('letters.index');
+Route::post("/letters", [\App\Http\Controllers\LetterController::class, 'generate'])->name('letters.generate');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
